@@ -1,0 +1,72 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "model": "deepseek/deepseek-v4-flash",
+  "small_model": "deepseek/deepseek-v4-flash",
+  "default_agent": "build",
+
+  "subagent_depth": 1,
+  "autoupdate": false,
+  "share": "disabled",
+  "lsp": true,
+
+  "provider": {
+    "deepseek": {
+      "models": {
+        "deepseek-v4-flash": {
+          "limit": { "context": 1000000, "input": 200000, "output": 384000 }
+        },
+        "deepseek-v4-pro": {
+          "limit": { "context": 1000000, "input": 320000, "output": 384000 }
+        }
+      }
+    }
+  },
+
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "reserved": 20000,
+    "tail_turns": 4,
+    "preserve_recent_tokens": 40000
+  },
+
+  "skills": {
+    "paths": [
+      "/home/gazerah/.claude/skills"
+    ]
+  },
+
+  "mcp": {
+    "desktop": {
+      "type": "local",
+      "command": ["computer-use-linux", "mcp"],
+      "enabled": true
+    }
+  },
+
+  "permission": {
+    "edit": "allow",
+    "bash": {
+      "*": "allow",
+
+      "rm -rf *": "ask",
+      "git push *": "ask",
+      "git reset --hard*": "ask",
+      "git clean *": "ask",
+
+      "flatpak install *": "ask",
+      "flatpak uninstall *": "ask",
+      "flatpak remote-add *": "ask",
+      "snap install *": "ask",
+
+      "sudo": "deny",
+      "sudo *": "deny",
+      "pkexec *": "deny",
+      "apt *": "deny",
+      "apt-get *": "deny",
+      "dpkg *": "deny"
+    },
+    "webfetch": "allow"
+  }
+}
